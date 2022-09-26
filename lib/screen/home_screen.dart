@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/models/todo_list_model.dart';
 
 import '../widget/todo_list_widget.dart';
-
+enum FilterOptions { AZ, All, UnDone }
 class HomeScreen extends StatefulWidget {
    HomeScreen({Key? key}) : super(key: key);
 
@@ -11,6 +11,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  var _showAZ = false;
+  var _UnDone = false;
+
+
   final todosList = ToDoModel.todoList();
   final _todoController = TextEditingController();
   List<ToDoModel> _foundToDo = [];
@@ -30,10 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           IconButton(
               onPressed: () {
-
-          },
+                sort();
+              },
               icon: Icon(
-                Icons.sort
+                  Icons.sort
               ))
         ],
       ),
@@ -132,15 +137,25 @@ class _HomeScreenState extends State<HomeScreen> {
  //chuc nang xoa ghi chú
   void _deleteTodoItem(String id){
     setState(() {
+      todosList.removeWhere((item) => item.id == id);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Nội dung ghi chú đã được xóa"),
+        duration: Duration(seconds: 1),
+      ));
     });
-    todosList.removeWhere((item) => item.id == id);
+
+  }
+  void sort(){
+    setState(() {
+      _foundToDo.sort((a, b) => a.todoText.compareTo(b.todoText),);
+    });
   }
 //chuc nang them ghi chu
   void _addToDoItem(String toDo){
     setState(() {
       if(toDo.isEmpty){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Bạn không được để trống"),
+          content: Text("Ghi chú của bạn không có nội dung"),
           duration: Duration(seconds: 1),
         ));
       }else{

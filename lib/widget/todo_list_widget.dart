@@ -45,6 +45,9 @@ class TodoItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.red,
               borderRadius: BorderRadius.circular(5),
+              gradient: LinearGradient(colors: [
+                Colors.red, Colors.black12
+              ])
             ),
             child:IconButton(
               color: Colors.white,

@@ -1,9 +1,9 @@
 
-
+import 'package:provider/provider.dart';
 
 class ToDoModel {
-  String? id;
-  String? todoText;
+  String id;
+  String todoText;
   bool isDone;
 
   ToDoModel({
