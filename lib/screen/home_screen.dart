@@ -166,8 +166,18 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     _todoController.clear();
-
   }
+ //chuc nang sua noi dung
+
+  void _editContent(ToDoModel toDo){
+    setState(() {
+      final index = _foundToDo.indexWhere(
+            (element) => element!.id == toDo.id,
+      );
+      _foundToDo[index] = toDo;
+    });
+  }
+
 //chuc nang tim kiem
   void _runFillter(String enteredKeyword){
     List<ToDoModel> result = [];
@@ -181,6 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
       _foundToDo = result;
     });
   }
+
+
   Widget searchBox(){
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),

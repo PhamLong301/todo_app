@@ -17,6 +17,9 @@ class TodoItem extends StatelessWidget {
           print('Checking ....!!!',);
           onToDoChange(todo);
         },
+        onLongPress: () {
+
+        },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -49,6 +52,7 @@ class TodoItem extends StatelessWidget {
                 Colors.red, Colors.black12
               ])
             ),
+
             child:IconButton(
               color: Colors.white,
               iconSize: 18,
